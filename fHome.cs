@@ -41,7 +41,7 @@ namespace QuanLyQuanCafe
                 flpTable.Controls.Add(btn);
             }
         }
-
+        //Test branch
         private void ShowBill(int id)
         {
             lsvBill.Items.Clear();
