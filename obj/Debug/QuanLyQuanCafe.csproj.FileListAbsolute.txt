@@ -1,0 +1,13 @@
+D:\C#\Winform\QuanLyQuanCafe\QuanLyQuanCafe\bin\Debug\QuanLyQuanCafe.exe.config
+D:\C#\Winform\QuanLyQuanCafe\QuanLyQuanCafe\bin\Debug\QuanLyQuanCafe.exe
+D:\C#\Winform\QuanLyQuanCafe\QuanLyQuanCafe\bin\Debug\QuanLyQuanCafe.pdb
+D:\C#\Winform\QuanLyQuanCafe\QuanLyQuanCafe\obj\Debug\QuanLyQuanCafe.csprojAssemblyReference.cache
+D:\C#\Winform\QuanLyQuanCafe\QuanLyQuanCafe\obj\Debug\QuanLyQuanCafe.Properties.Resources.resources
+D:\C#\Winform\QuanLyQuanCafe\QuanLyQuanCafe\obj\Debug\QuanLyQuanCafe.csproj.GenerateResource.cache
+D:\C#\Winform\QuanLyQuanCafe\QuanLyQuanCafe\obj\Debug\QuanLyQuanCafe.csproj.CoreCompileInputs.cache
+D:\C#\Winform\QuanLyQuanCafe\QuanLyQuanCafe\obj\Debug\QuanLyQuanCafe.exe
+D:\C#\Winform\QuanLyQuanCafe\QuanLyQuanCafe\obj\Debug\QuanLyQuanCafe.pdb
+D:\C#\Winform\QuanLyQuanCafe\QuanLyQuanCafe\obj\Debug\QuanLyQuanCafe.fProfile.resources
+D:\C#\Winform\QuanLyQuanCafe\QuanLyQuanCafe\obj\Debug\QuanLyQuanCafe.fAdmin.resources
+D:\C#\Winform\QuanLyQuanCafe\QuanLyQuanCafe\obj\Debug\QuanLyQuanCafe.fHome.resources
+D:\C#\Winform\QuanLyQuanCafe\QuanLyQuanCafe\obj\Debug\QuanLyQuanCafe.fLogin.resources
