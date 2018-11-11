@@ -40,7 +40,6 @@
             this.TotalPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel3 = new System.Windows.Forms.Panel();
             this.txtTotalPayment = new System.Windows.Forms.TextBox();
-            this.nmSwitchtable = new System.Windows.Forms.NumericUpDown();
             this.lblPassword = new System.Windows.Forms.Label();
             this.nmDiscount = new System.Windows.Forms.NumericUpDown();
             this.btnSwitchtable = new System.Windows.Forms.Button();
@@ -53,10 +52,10 @@
             this.cbCategory = new System.Windows.Forms.ComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.flpTable = new System.Windows.Forms.FlowLayoutPanel();
+            this.cbSwitchTable = new System.Windows.Forms.ComboBox();
             this.mnInfo.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nmSwitchtable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmDiscount)).BeginInit();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmProductcount)).BeginInit();
@@ -137,8 +136,8 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.cbSwitchTable);
             this.panel3.Controls.Add(this.txtTotalPayment);
-            this.panel3.Controls.Add(this.nmSwitchtable);
             this.panel3.Controls.Add(this.lblPassword);
             this.panel3.Controls.Add(this.nmDiscount);
             this.panel3.Controls.Add(this.btnSwitchtable);
@@ -161,21 +160,6 @@
             this.txtTotalPayment.TabIndex = 6;
             this.txtTotalPayment.Text = "0,00 ₫";
             this.txtTotalPayment.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // nmSwitchtable
-            // 
-            this.nmSwitchtable.BackColor = System.Drawing.SystemColors.Info;
-            this.nmSwitchtable.Font = new System.Drawing.Font("Candara", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nmSwitchtable.Location = new System.Drawing.Point(3, 64);
-            this.nmSwitchtable.Maximum = new decimal(new int[] {
-            500,
-            0,
-            0,
-            0});
-            this.nmSwitchtable.Name = "nmSwitchtable";
-            this.nmSwitchtable.Size = new System.Drawing.Size(80, 26);
-            this.nmSwitchtable.TabIndex = 4;
-            this.nmSwitchtable.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblPassword
             // 
@@ -206,6 +190,7 @@
             this.btnSwitchtable.TabIndex = 6;
             this.btnSwitchtable.Text = "Switch Table";
             this.btnSwitchtable.UseVisualStyleBackColor = false;
+            this.btnSwitchtable.Click += new System.EventHandler(this.btnSwitchtable_Click);
             // 
             // btnCheckout
             // 
@@ -218,6 +203,7 @@
             this.btnCheckout.TabIndex = 5;
             this.btnCheckout.Text = "Check Out";
             this.btnCheckout.UseVisualStyleBackColor = false;
+            this.btnCheckout.Click += new System.EventHandler(this.btnCheckout_Click);
             // 
             // btnDiscount
             // 
@@ -271,6 +257,7 @@
             this.btnAddproduct.TabIndex = 2;
             this.btnAddproduct.Text = "Add";
             this.btnAddproduct.UseVisualStyleBackColor = false;
+            this.btnAddproduct.Click += new System.EventHandler(this.btnAddproduct_Click);
             // 
             // cbProduct
             // 
@@ -289,6 +276,7 @@
             this.cbCategory.Name = "cbCategory";
             this.cbCategory.Size = new System.Drawing.Size(197, 22);
             this.cbCategory.TabIndex = 0;
+            this.cbCategory.SelectedIndexChanged += new System.EventHandler(this.cbCategory_SelectedIndexChanged);
             // 
             // panel1
             // 
@@ -307,6 +295,14 @@
             this.flpTable.Name = "flpTable";
             this.flpTable.Size = new System.Drawing.Size(463, 425);
             this.flpTable.TabIndex = 0;
+            // 
+            // cbSwitchTable
+            // 
+            this.cbSwitchTable.FormattingEnabled = true;
+            this.cbSwitchTable.Location = new System.Drawing.Point(6, 67);
+            this.cbSwitchTable.Name = "cbSwitchTable";
+            this.cbSwitchTable.Size = new System.Drawing.Size(77, 22);
+            this.cbSwitchTable.TabIndex = 7;
             // 
             // fHome
             // 
@@ -331,7 +327,6 @@
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nmSwitchtable)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmDiscount)).EndInit();
             this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nmProductcount)).EndInit();
@@ -357,7 +352,6 @@
         private System.Windows.Forms.Button btnSwitchtable;
         private System.Windows.Forms.Button btnCheckout;
         private System.Windows.Forms.Button btnDiscount;
-        private System.Windows.Forms.NumericUpDown nmSwitchtable;
         private System.Windows.Forms.ListView lsvBill;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
@@ -367,5 +361,6 @@
         private System.Windows.Forms.Label lblPassword;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.FlowLayoutPanel flpTable;
+        private System.Windows.Forms.ComboBox cbSwitchTable;
     }
 }

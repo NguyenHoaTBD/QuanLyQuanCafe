@@ -26,16 +26,51 @@ namespace QuanLyQuanCafe.DAO
         /// <returns></returns>
         public int GetUncheckOutBillByTableId(int table, int status)
         {
-            string query = "Exec USP_GETBillByTableAndStatus @idTable , @status ";
-            int result = 0;
-            DataTable data = DataProvider.Instance.ExecuteQuery(query, new object[] {table, status});
-            if(data.Rows.Count > 0)
+            try
             {
-                Bill bill = new Bill(data.Rows[0]);
-                return bill.Id;
+                string query = "Exec USP_GETBillByTableAndStatus @idTable , @status ";
+                int result = 0;
+                DataTable data = DataProvider.Instance.ExecuteQuery(query, new object[] { table, status });
+                if (data.Rows.Count > 0)
+                {
+                    Bill bill = new Bill(data.Rows[0]);
+                    return bill.Id;
+                }
+                return -1;
             }
-            return -1;
+            catch(Exception ex)
+            {
+                return -1;
+            }
         }
-
+        public void InsertBill(int idTable)
+        {
+            string query = "Exec USP_InsertBill @idTable";
+            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { idTable });
+        }
+        /// <summary>
+        /// Get id max bill
+        /// </summary>
+        /// <returns></returns>
+        public int GetBillIdMax()
+        {
+            try
+            {
+                string query = "Select Max(Id) From Bill";
+                return (int)DataProvider.Instance.ExecuteScalar(query);
+            }
+            catch
+            {
+                return 1;
+            }
+        }
+        /// <summary>
+        /// Check out 
+        /// </summary>
+        public void CheckOut(int idBill, int disCount)
+        {
+            string query = "Exec USP_CheckOut @idBill , @disCount";
+            int checkout = DataProvider.Instance.ExecuteNonQuery(query, new object[] { idBill, disCount });
+        }
     }
 }

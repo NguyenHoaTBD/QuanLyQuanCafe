@@ -10,6 +10,7 @@ namespace QuanLyQuanCafe.DAO
 {
     class TableDAO
     {
+        #region Singleton design parten
         private static TableDAO instance;
         public static TableDAO Instance
         {
@@ -22,6 +23,7 @@ namespace QuanLyQuanCafe.DAO
             private set => instance = value;
         }
         private TableDAO() { }
+        #endregion
 
         public List<Table> GetListTable()
         {
@@ -35,6 +37,17 @@ namespace QuanLyQuanCafe.DAO
             }
             return listTable;
         }
+        public void ChangeStatusTable(int id, string status)
+        {
+            string query = "Update TableFood Set [status] = '" + status + "' Where id = " + id;
+            DataProvider.Instance.ExecuteNonQuery(query);
+        }
+        public bool SwitchTable(int idFirstTable, int idSecondTable)
+        {
+            string query = "EXEC USP_SwitchTable @idFirstTable , @idsecondTable ";
+            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] {idFirstTable, idSecondTable });
 
+            return result > 0 ? true : false;
+        }
     }
 }

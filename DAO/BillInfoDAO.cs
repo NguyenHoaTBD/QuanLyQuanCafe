@@ -24,7 +24,7 @@ namespace QuanLyQuanCafe.DAO
         {
             List<BillInfo> billinfoList = new List<BillInfo>();
             string query = "Exec USP_GetListBillInfo @id";
-            DataTable data = DataProvider.Instance.ExecuteQuery(query, new object[] { id});
+            DataTable data = DataProvider.Instance.ExecuteQuery(query, new object[] { id });
             if(data.Rows.Count > 0)
             {
                 foreach (DataRow dataRow in data.Rows)
@@ -34,6 +34,11 @@ namespace QuanLyQuanCafe.DAO
                 }
             }
             return billinfoList;
+        }
+        public void InsertBillInfo(int idProduct, int idBill, int count)
+        {
+            string query = "Exec USP_InsertBillInfo @idBill , @idProduct , @count";
+            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { idBill, idProduct, count });
         }
     }
 }
