@@ -75,7 +75,8 @@
             // txtUsername
             // 
             this.txtUsername.BackColor = System.Drawing.SystemColors.Info;
-            this.txtUsername.Location = new System.Drawing.Point(118, 8);
+            this.txtUsername.Enabled = false;
+            this.txtUsername.Location = new System.Drawing.Point(127, 8);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.ReadOnly = true;
             this.txtUsername.Size = new System.Drawing.Size(245, 20);
@@ -105,7 +106,7 @@
             // txtEmail
             // 
             this.txtEmail.BackColor = System.Drawing.SystemColors.Info;
-            this.txtEmail.Location = new System.Drawing.Point(118, 8);
+            this.txtEmail.Location = new System.Drawing.Point(127, 8);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(245, 20);
             this.txtEmail.TabIndex = 5;
@@ -134,10 +135,11 @@
             // txtPassword
             // 
             this.txtPassword.BackColor = System.Drawing.SystemColors.Info;
-            this.txtPassword.Location = new System.Drawing.Point(118, 8);
+            this.txtPassword.Location = new System.Drawing.Point(127, 8);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(245, 20);
             this.txtPassword.TabIndex = 5;
+            this.txtPassword.UseSystemPasswordChar = true;
             // 
             // lblOldPassword
             // 
@@ -163,7 +165,7 @@
             // txtNewpass
             // 
             this.txtNewpass.BackColor = System.Drawing.SystemColors.Info;
-            this.txtNewpass.Location = new System.Drawing.Point(118, 8);
+            this.txtNewpass.Location = new System.Drawing.Point(127, 3);
             this.txtNewpass.Name = "txtNewpass";
             this.txtNewpass.Size = new System.Drawing.Size(245, 20);
             this.txtNewpass.TabIndex = 5;
@@ -193,7 +195,7 @@
             // txtConfirmpass
             // 
             this.txtConfirmpass.BackColor = System.Drawing.SystemColors.Info;
-            this.txtConfirmpass.Location = new System.Drawing.Point(118, 7);
+            this.txtConfirmpass.Location = new System.Drawing.Point(127, 7);
             this.txtConfirmpass.Name = "txtConfirmpass";
             this.txtConfirmpass.Size = new System.Drawing.Size(245, 20);
             this.txtConfirmpass.TabIndex = 5;
@@ -205,11 +207,11 @@
             this.lnlConfirmpass.BackColor = System.Drawing.SystemColors.WindowText;
             this.lnlConfirmpass.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lnlConfirmpass.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.lnlConfirmpass.Location = new System.Drawing.Point(5, 7);
+            this.lnlConfirmpass.Location = new System.Drawing.Point(4, 7);
             this.lnlConfirmpass.Name = "lnlConfirmpass";
-            this.lnlConfirmpass.Size = new System.Drawing.Size(101, 16);
+            this.lnlConfirmpass.Size = new System.Drawing.Size(119, 16);
             this.lnlConfirmpass.TabIndex = 4;
-            this.lnlConfirmpass.Text = "New Password:";
+            this.lnlConfirmpass.Text = "Confirm Password:";
             // 
             // btnUpdate
             // 
@@ -220,6 +222,7 @@
             this.btnUpdate.TabIndex = 7;
             this.btnUpdate.Text = "Update";
             this.btnUpdate.UseVisualStyleBackColor = false;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // btnCancle
             // 
@@ -244,9 +247,8 @@
             // txtDisplayname
             // 
             this.txtDisplayname.BackColor = System.Drawing.SystemColors.Info;
-            this.txtDisplayname.Location = new System.Drawing.Point(118, 8);
+            this.txtDisplayname.Location = new System.Drawing.Point(127, 9);
             this.txtDisplayname.Name = "txtDisplayname";
-            this.txtDisplayname.ReadOnly = true;
             this.txtDisplayname.Size = new System.Drawing.Size(245, 20);
             this.txtDisplayname.TabIndex = 5;
             // 

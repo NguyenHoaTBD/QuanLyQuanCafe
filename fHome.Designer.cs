@@ -39,12 +39,12 @@
             this.Price = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.TotalPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel3 = new System.Windows.Forms.Panel();
+            this.cbSwitchTable = new System.Windows.Forms.ComboBox();
             this.txtTotalPayment = new System.Windows.Forms.TextBox();
             this.lblPassword = new System.Windows.Forms.Label();
             this.nmDiscount = new System.Windows.Forms.NumericUpDown();
             this.btnSwitchtable = new System.Windows.Forms.Button();
             this.btnCheckout = new System.Windows.Forms.Button();
-            this.btnDiscount = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
             this.nmProductcount = new System.Windows.Forms.NumericUpDown();
             this.btnAddproduct = new System.Windows.Forms.Button();
@@ -52,7 +52,7 @@
             this.cbCategory = new System.Windows.Forms.ComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.flpTable = new System.Windows.Forms.FlowLayoutPanel();
-            this.cbSwitchTable = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.mnInfo.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -136,17 +136,25 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.label1);
             this.panel3.Controls.Add(this.cbSwitchTable);
             this.panel3.Controls.Add(this.txtTotalPayment);
             this.panel3.Controls.Add(this.lblPassword);
             this.panel3.Controls.Add(this.nmDiscount);
             this.panel3.Controls.Add(this.btnSwitchtable);
             this.panel3.Controls.Add(this.btnCheckout);
-            this.panel3.Controls.Add(this.btnDiscount);
             this.panel3.Location = new System.Drawing.Point(492, 378);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(296, 95);
             this.panel3.TabIndex = 3;
+            // 
+            // cbSwitchTable
+            // 
+            this.cbSwitchTable.FormattingEnabled = true;
+            this.cbSwitchTable.Location = new System.Drawing.Point(6, 67);
+            this.cbSwitchTable.Name = "cbSwitchTable";
+            this.cbSwitchTable.Size = new System.Drawing.Size(77, 22);
+            this.cbSwitchTable.TabIndex = 7;
             // 
             // txtTotalPayment
             // 
@@ -174,7 +182,7 @@
             // 
             this.nmDiscount.BackColor = System.Drawing.SystemColors.Info;
             this.nmDiscount.Font = new System.Drawing.Font("Candara", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nmDiscount.Location = new System.Drawing.Point(102, 65);
+            this.nmDiscount.Location = new System.Drawing.Point(102, 63);
             this.nmDiscount.Name = "nmDiscount";
             this.nmDiscount.Size = new System.Drawing.Size(79, 26);
             this.nmDiscount.TabIndex = 4;
@@ -204,17 +212,6 @@
             this.btnCheckout.Text = "Check Out";
             this.btnCheckout.UseVisualStyleBackColor = false;
             this.btnCheckout.Click += new System.EventHandler(this.btnCheckout_Click);
-            // 
-            // btnDiscount
-            // 
-            this.btnDiscount.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnDiscount.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.btnDiscount.Location = new System.Drawing.Point(101, 33);
-            this.btnDiscount.Name = "btnDiscount";
-            this.btnDiscount.Size = new System.Drawing.Size(80, 25);
-            this.btnDiscount.TabIndex = 4;
-            this.btnDiscount.Text = "Discount";
-            this.btnDiscount.UseVisualStyleBackColor = false;
             // 
             // panel4
             // 
@@ -296,13 +293,14 @@
             this.flpTable.Size = new System.Drawing.Size(463, 425);
             this.flpTable.TabIndex = 0;
             // 
-            // cbSwitchTable
+            // label1
             // 
-            this.cbSwitchTable.FormattingEnabled = true;
-            this.cbSwitchTable.Location = new System.Drawing.Point(6, 67);
-            this.cbSwitchTable.Name = "cbSwitchTable";
-            this.cbSwitchTable.Size = new System.Drawing.Size(77, 22);
-            this.cbSwitchTable.TabIndex = 7;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(106, 40);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(55, 14);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Discount:";
             // 
             // fHome
             // 
@@ -351,7 +349,6 @@
         private System.Windows.Forms.NumericUpDown nmDiscount;
         private System.Windows.Forms.Button btnSwitchtable;
         private System.Windows.Forms.Button btnCheckout;
-        private System.Windows.Forms.Button btnDiscount;
         private System.Windows.Forms.ListView lsvBill;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
@@ -362,5 +359,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.FlowLayoutPanel flpTable;
         private System.Windows.Forms.ComboBox cbSwitchTable;
+        private System.Windows.Forms.Label label1;
     }
 }

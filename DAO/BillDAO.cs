@@ -67,10 +67,23 @@ namespace QuanLyQuanCafe.DAO
         /// <summary>
         /// Check out 
         /// </summary>
-        public void CheckOut(int idBill, int disCount)
+        public void CheckOut(int idBill, int disCount, decimal totalPayment)
         {
-            string query = "Exec USP_CheckOut @idBill , @disCount";
-            int checkout = DataProvider.Instance.ExecuteNonQuery(query, new object[] { idBill, disCount });
+            string query = "Exec USP_CheckOut @idBill , @disCount , @totalPayment";
+            int checkout = DataProvider.Instance.ExecuteNonQuery(query, new object[] { idBill, disCount, totalPayment});
+        }
+
+        public DataTable GetListBillCheckedByDate(DateTime dateCheckin, DateTime dateCheckout, int PageSize = 15, int pageNumber = 1)
+        {
+            string query = "Exec USP_GetListBillCheckedByDate @dataCheckIn , @dataCheckOut , @PageSize , @PageNumber  ";
+            DataTable result = DataProvider.Instance.ExecuteQuery(query, new object[] { dateCheckin, dateCheckout, PageSize, pageNumber});
+            return result;
+        }
+        public int GetCountBillCheckedByDate(DateTime dateCheckin, DateTime dateCheckout)
+        {
+            string query = "Exec USP_GetCountBillCheckedByDate @dataCheckIn , @dataCheckOut ";
+            int result = (int)DataProvider.Instance.ExecuteScalar(query, new object[] { dateCheckin, dateCheckout });
+            return result;
         }
     }
 }

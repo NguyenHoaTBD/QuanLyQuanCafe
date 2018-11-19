@@ -1,4 +1,5 @@
 ﻿using QuanLyQuanCafe.DAO;
+using QuanLyQuanCafe.DTO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -30,9 +31,10 @@ namespace QuanLyQuanCafe
         {
             string username = txtUsername.Text;
             string password = txtPassword.Text;
+            Account account = AccountDAO.Instance.GetAccountByName(username);
             if (Login(username, password))
             {
-                fHome fHome = new fHome();
+                fHome fHome = new fHome(account);
                 this.Hide();
                 fHome.ShowDialog();
                 this.Show();

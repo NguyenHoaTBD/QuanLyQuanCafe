@@ -2,7 +2,7 @@
 
 namespace QuanLyQuanCafe.DTO
 {
-    internal class Category
+    public class Category
     {
         public Category(int id, string name)
        {

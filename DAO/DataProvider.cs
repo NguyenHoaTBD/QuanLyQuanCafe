@@ -85,7 +85,7 @@ namespace QuanLyQuanCafe.DAO
                 result = Command.ExecuteNonQuery();
                 return result;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return result;
             }

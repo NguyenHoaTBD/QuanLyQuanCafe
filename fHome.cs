@@ -2,13 +2,8 @@
 using QuanLyQuanCafe.DTO;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Menu = QuanLyQuanCafe.DTO.Menu;
 
@@ -16,10 +11,17 @@ namespace QuanLyQuanCafe
 {
     public partial class fHome : Form
     {
-        public fHome()
+        private Account account;
+        public Account Account
+        {
+            get { return account; }
+            set { account = value; LayoutAdmin(account.Type); }
+
+        }
+        public fHome(Account account)
         {
             InitializeComponent();
-
+            this.Account = account;
             LoadTable();
             LoadCategoryList();
         }
@@ -52,6 +54,12 @@ namespace QuanLyQuanCafe
                 flpTable.Controls.Add(btn);
             }
         }
+
+        private void LayoutAdmin(int type)
+        {
+            adminToolStripMenuItem.Enabled = type == 1;
+            ProfileToolStripMenuItem.Text += " (" + account.Displayname +")";
+        }
         /// <summary>
         /// Show menu when click to table...
         /// </summary>
@@ -80,16 +88,21 @@ namespace QuanLyQuanCafe
             List<Category> Categories = CategoryDAO.Instance.GetListCategory();
             cbCategory.DataSource = Categories;
             cbCategory.DisplayMember = "Name";
-            if(Categories.Count > 0)
+            if (Categories.Count > 0)
+            {
                 LoadProductByCategoryId(Categories[0].Id);
+            }
         }
 
         private void LoadProductByCategoryId(int id)
         {
-            List<Product> products = ProductDAO.Instance.GetListCategory(id);
+            List<Product> products = ProductDAO.Instance.GetListProductById(id);
             cbProduct.DataSource = products;
             cbProduct.DisplayMember = "Name";
-            if (products.Count <= 0) cbProduct.Text = String.Empty;
+            if (products.Count <= 0)
+            {
+                cbProduct.Text = string.Empty;
+            }
         }
         #endregion
 
@@ -97,36 +110,60 @@ namespace QuanLyQuanCafe
         #region Events Handle
         private void btn_Click(object sender, EventArgs e)
         {
-             int idTable = ((sender as Button).Tag as Table).Id;
-            lsvBill.Tag = (sender as Button).Tag; 
-             ShowBill(idTable);
+            int idTable = ((sender as Button).Tag as Table).Id;
+            lsvBill.Tag = (sender as Button).Tag;
+            ShowBill(idTable);
         }
         private void adminToolStripMenuItem_Click(object sender, EventArgs e)
         {
             fAdmin fAdmin = new fAdmin();
-            this.Hide();
+            Hide();
+            fAdmin.InsertFood += fAdmin_InsertFood;
+            fAdmin.UpdateFood += fAdmin_UpdateFood;
+            fAdmin.DeleteFood += fAdmin_DeleteFood;
             fAdmin.ShowDialog();
-            this.Show();
+            Show();
         }
+
+        private void fAdmin_DeleteFood(object sender, EventArgs e)
+        {
+            LoadProductByCategoryId((cbCategory.SelectedItem as Category).Id);
+        }
+
+        private void fAdmin_UpdateFood(object sender, EventArgs e)
+        {
+            LoadProductByCategoryId((cbCategory.SelectedItem as Category).Id);
+            ShowBill((lsvBill.Tag as Table).Id);
+        }
+
+        private void fAdmin_InsertFood(object sender, EventArgs e)
+        {
+            LoadProductByCategoryId((sender as Product).Id);
+        }
+
         //Event click profile
         private void ProfileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            fProfile profile = new fProfile();
-            this.Hide();
+            fProfile profile = new fProfile(account);
+            Hide();
             profile.ShowDialog();
-            this.Show();
+            Show();
         }
         private void cbCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
             ComboBox cb = sender as ComboBox;
             if (cb.SelectedItem == null)
+            {
                 return;
+            }
+
             Category selected = cb.SelectedItem as Category;
             LoadProductByCategoryId(selected.Id);
-        } 
+        }
         private void btnAddproduct_Click(object sender, EventArgs e)
         {
             Table table = lsvBill.Tag as Table;
+            if (table == null) return;
             int idBill = BillDAO.Instance.GetUncheckOutBillByTableId(table.Id, 0);
             int idProduct = (cbProduct.SelectedItem as Product).Id;
             int count = (int)nmProductcount.Value;
@@ -134,7 +171,6 @@ namespace QuanLyQuanCafe
             {
                 BillDAO.Instance.InsertBill(table.Id);
                 BillInfoDAO.Instance.InsertBillInfo(idProduct, BillDAO.Instance.GetBillIdMax(), count);
-                //TableDAO.Instance.ChangeStatusTable(table.Id, "Using..");
                 LoadTable();
             }
             else
@@ -150,30 +186,41 @@ namespace QuanLyQuanCafe
             int idBill = BillDAO.Instance.GetUncheckOutBillByTableId(table.Id, 0);
             int disCount = (int)nmDiscount.Value;
             string payment = txtTotalPayment.Text.Split(',')[0].Replace(".", string.Empty);
-            if (String.IsNullOrWhiteSpace(payment))
+            if (string.IsNullOrWhiteSpace(payment))
+            {
                 return;
-            var totalPayment = Convert.ToDecimal(txtTotalPayment.Text.Split(',')[0].Replace(".", string.Empty));
+            }
+
+            decimal totalPayment = Convert.ToDecimal(txtTotalPayment.Text.Split(',')[0].Replace(".", string.Empty));
             CultureInfo cul = CultureInfo.GetCultureInfo("vi-VN");   // try with "en-US"
             decimal pay = totalPayment - totalPayment * disCount / 100;
             if (idBill != -1)
-                if(MessageBox.Show("Do you want to checkout " + table.Name + " ?" + $" \n TotalPrice = {pay.ToString("#,###", cul.NumberFormat)} Vnđ", "Confirm!", MessageBoxButtons.OKCancel) == DialogResult.OK)
+            {
+                if (MessageBox.Show("Do you want to checkout " + table.Name + " ?" + $" \n TotalPrice = {pay.ToString("#,###", cul.NumberFormat)} Vnđ", "Confirm!", MessageBoxButtons.OKCancel) == DialogResult.OK)
                 {
                     //Checkout
-                    BillDAO.Instance.CheckOut(idBill, disCount);
+                    BillDAO.Instance.CheckOut(idBill, disCount, pay);
                     ShowBill(table.Id);
-                    //TableDAO.Instance.ChangeStatusTable(table.Id, "Empty");
                     LoadTable();
                 }
+            }
         }
         private void btnSwitchtable_Click(object sender, EventArgs e)
         {
             Table table1 = lsvBill.Tag as Table;
-            Table  table2 = cbSwitchTable.SelectedItem as Table;
-            if(MessageBox.Show($"Do you want to switch {table1.Name} to {table2.Name}?", "Confirm:", MessageBoxButtons.OKCancel) == DialogResult.OK)
+            Table table2 = cbSwitchTable.SelectedItem as Table;
+            if (MessageBox.Show($"Do you want to switch {table1.Name} to {table2.Name}?", "Confirm:", MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
                 bool result = TableDAO.Instance.SwitchTable(table1.Id, table2.Id);
-                if (result) MessageBox.Show("Success!");
-                else MessageBox.Show("Fail!");
+                if (result)
+                {
+                    MessageBox.Show("Success!");
+                }
+                else
+                {
+                    MessageBox.Show("Fail!");
+                }
+
                 LoadTable();
             }
         }
